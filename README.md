@@ -1,14 +1,15 @@
 # Paper-Mixin-Example
  
 ## 使用方法
-### コマンドラインから起動
-`java -jar paper-mixin-example-1.0.jar --serverJar {server.jar}`
 ### IntelliJから起動
-patched_1.16.5.jarを用意してserver直下に置く\
-あとは画像の通り
+プロジェクトディレクトリ直下に `server`, `libs` ディレクトリをつくる\
+`patched_1.16.5.jar` を用意して `libs` 直下に置く\
+`settings.gradle`, `plugin.yml`, `PaperMixinExamplePlugin.java`, `MixinCraftPlayer.java` と
+`papermixin` で検索して出てくるすべての場所は適宜書き換えてください
 
-![image](https://user-images.githubusercontent.com/41502287/131126876-cf9febdc-bf62-4e21-862a-b9d751c60ac0.png)
-
+実行構成は画像の通りにすると、MixinにHotSwapが使えて幸せになれます
+![image](https://user-images.githubusercontent.com/41502287/131144343-1d0feefe-9f5d-4e06-8b83-e17fb02c02ab.png)
+VMオプション: `-Xmx2G -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -javaagent:"{mixinライブラリのキャッシュディレクトリ}"`
 
 ## 参考
 https://github.com/LXGaming/BukkitBootstrap \
