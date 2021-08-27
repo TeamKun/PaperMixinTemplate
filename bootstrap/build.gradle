@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
+}
+
+group 'com.yu212'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "minecraft"
+        url = "https://libraries.minecraft.net"
+    }
+    maven {
+        name = "spongepowered"
+        url = "https://repo.spongepowered.org/maven"
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: "../libs/", include: "patched_*.jar")
+    implementation "org.ow2.asm:asm-tree:6.2"
+    implementation "org.ow2.asm:asm-commons:6.2"
+    implementation "org.ow2.asm:asm-util:6.2"
+    implementation "org.spongepowered:mixin:0.8.2"
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation ("net.minecraft:launchwrapper:1.12") {
+        exclude group: "net.sf.jopt-simple"
+        exclude group: "org.apache.logging.log4j"
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "com.yu212.papermixin.Main",
+                "MixinConfigs": "papermixin.mixins.json"
+        )
+    }
+}
+
+shadowJar {
+    exclude "META-INF/*"
+    archiveFileName = "${rootProject.name}-bootstrap-${archiveVersion.get()}.jar"
+}
+
+task copyToServer(type: Copy) {
+    from new File(buildDir.absolutePath, "libs/${rootProject.name}-bootstrap-${version}.jar")
+    into "../server"
+}
