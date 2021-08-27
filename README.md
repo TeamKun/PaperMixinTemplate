@@ -1,6 +1,7 @@
 # Paper-Mixin-Example
  
 ## 使用方法
+このリポジトリのトップページにある `Use this template` を押すとなんかうまいことなりそうです\
 プロジェクトディレクトリ直下に `server`, `libs` ディレクトリをつくる\
 `patched_1.16.5.jar` を用意して `libs` 直下に置く\
 `settings.gradle`, `plugin.yml`, `PaperMixinExamplePlugin.java`, `MixinCraftPlayer.java` と
