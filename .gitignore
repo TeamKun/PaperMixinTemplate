@@ -2,5 +2,7 @@
 /.idea/
 build/
 /gradle/
-/libs/
-/server/
+/libs/*
+!/libs/.keep
+/server/*
+!/server/.keep
