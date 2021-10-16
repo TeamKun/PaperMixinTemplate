@@ -1,10 +1,6 @@
 plugins {
-    id 'java'
     id "com.github.johnrengelman.shadow" version "6.1.0"
 }
-
-group 'com.yu212'
-version '1.0'
 
 repositories {
     mavenCentral()
@@ -16,11 +12,6 @@ repositories {
         name = "spongepowered"
         url = "https://repo.spongepowered.org/maven"
     }
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
