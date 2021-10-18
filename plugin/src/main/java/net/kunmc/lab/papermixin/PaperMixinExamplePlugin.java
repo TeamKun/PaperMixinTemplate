@@ -1,4 +1,4 @@
-package com.yu212.papermixin;
+package net.kunmc.lab.papermixin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

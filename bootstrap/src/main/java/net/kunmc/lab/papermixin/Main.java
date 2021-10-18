@@ -1,4 +1,4 @@
-package com.yu212.papermixin;
+package net.kunmc.lab.papermixin;
 
 import net.minecraft.launchwrapper.Launch;
 

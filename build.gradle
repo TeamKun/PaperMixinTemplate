@@ -1,4 +1,4 @@
-group 'com.yu212'
+group 'net.kunmc.lab'
 version '1.0'
 
 repositories {

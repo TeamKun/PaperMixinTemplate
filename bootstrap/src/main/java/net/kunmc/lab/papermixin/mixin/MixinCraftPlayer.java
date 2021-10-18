@@ -1,4 +1,4 @@
-package com.yu212.papermixin.mixin;
+package net.kunmc.lab.papermixin.mixin;
 
 import net.minecraft.server.v1_16_R3.Entity;
 import org.spongepowered.asm.mixin.Mixin;

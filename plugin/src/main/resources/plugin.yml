@@ -1,5 +1,4 @@
 name: Paper-Mixin-Example
 version: '${version}'
-main: com.yu212.papermixin.PaperMixinExamplePlugin
+main: net.kunmc.lab.papermixin.PaperMixinExamplePlugin
 api-version: 1.16
-authors: [ Yu_212 ]

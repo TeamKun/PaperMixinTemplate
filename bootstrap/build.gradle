@@ -28,7 +28,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                "Main-Class": "com.yu212.papermixin.Main",
+                "Main-Class": "${this.getGroup()}.papermixin.Main",
                 "MixinConfigs": "papermixin.mixins.json"
         )
     }
