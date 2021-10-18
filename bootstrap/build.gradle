@@ -22,10 +22,7 @@ dependencies {
     implementation "org.spongepowered:mixin:0.8.2"
     implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
     implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
-    implementation("net.minecraft:launchwrapper:1.12") {
-        exclude group: "net.sf.jopt-simple"
-        exclude group: "org.apache.logging.log4j"
-    }
+    compileOnly "net.minecraft:launchwrapper:1.12"
 }
 
 jar {
