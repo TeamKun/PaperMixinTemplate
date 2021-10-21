@@ -1,4 +1,3 @@
-rootProject.name = 'paper-mixin-example'
-include 'plugin'
-include 'bootstrap'
+rootProject.name = 'PaperMixinTemplate'
+include 'plugin', 'bootstrap'
 

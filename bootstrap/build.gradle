@@ -14,14 +14,16 @@ repositories {
     }
 }
 
+final String patchedFileName = "patched_1.16.5.jar"
+
 dependencies {
-    compileOnly fileTree(dir: "../libs/", include: "patched_*.jar")
-    implementation 'org.ow2.asm:asm-tree:9.2'
-    implementation 'org.ow2.asm:asm-commons:9.2'
-    implementation 'org.ow2.asm:asm-util:9.2'
+    compileOnly fileTree(dir: "../libs/", include: patchedFileName)
+    implementation "org.ow2.asm:asm-tree:9.2"
+    implementation "org.ow2.asm:asm-commons:9.2"
+    implementation "org.ow2.asm:asm-util:9.2"
     implementation "org.spongepowered:mixin:0.8.2"
-    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation "org.apache.logging.log4j:log4j-api:2.14.1"
+    implementation "org.apache.logging.log4j:log4j-core:2.14.1"
     compileOnly "net.minecraft:launchwrapper:1.12"
 }
 
@@ -36,10 +38,27 @@ jar {
 
 shadowJar {
     exclude "META-INF/*"
-    archiveFileName = "${rootProject.name}-bootstrap-${archiveVersion.get()}.jar"
+    archiveFileName = "server.jar"
 }
 
-task copyToServer(type: Copy) {
-    from new File(buildDir.absolutePath, "libs/${rootProject.name}-bootstrap-${version}.jar")
+task copyBuildToServer(type: Copy) {
+    mustRunAfter shadowJar
+    from new File(buildDir.absolutePath, "/libs/server.jar")
     into "../server"
+}
+
+task copyMixinLibToServer(type: Copy) {
+    from configurations.compileClasspath.getFiles().stream()
+            .filter(x -> x.getName().matches(".*mixin-.*.jar"))
+            .findFirst().get()
+    into "../server"
+}
+
+task copyPatchedToServer(type: Copy) {
+    from new File("../libs/" + patchedFileName)
+    into "../server/cache"
+}
+
+task buildServer {
+    dependsOn shadowJar, copyBuildToServer, copyMixinLibToServer, copyPatchedToServer
 }

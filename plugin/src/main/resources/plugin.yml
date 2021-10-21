@@ -1,4 +1,4 @@
-name: Paper-Mixin-Example
-version: '${version}'
-main: net.kunmc.lab.papermixin.PaperMixinExamplePlugin
+name: PaperMixinExample
+version: '1.0.0'
+main: net.kunmc.lab.papermixin.PaperMixinExample
 api-version: 1.16

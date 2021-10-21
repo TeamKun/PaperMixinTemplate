@@ -1,6 +1,8 @@
 package net.kunmc.lab.papermixin;
 
 import net.minecraft.launchwrapper.Launch;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +49,7 @@ public class Main {
             addURL(serverJarPath);
         } catch (Exception e) {
             e.printStackTrace();
+            LogManager.getLogger(Main.class).log(Level.FATAL, "Should run server.jar in Java8");
             System.exit(1);
         }
         System.out.println("Loaded Server Jar " + serverJarPath.toAbsolutePath());

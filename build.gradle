@@ -1,18 +1,8 @@
-group 'net.kunmc.lab'
-version '1.0'
+allprojects {
+    apply plugin: "java"
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-}
-
-subprojects {
-    apply plugin: 'java'
-
-    group this.group
-    version this.version
+    group "net.kunmc.lab"
+    version "1.0.0"
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8

@@ -5,4 +5,5 @@ build/
 /libs/*
 !/libs/.keep
 /server/*
-!/server/.keep
+!/server/start.sh
+!/server/start.cmd
