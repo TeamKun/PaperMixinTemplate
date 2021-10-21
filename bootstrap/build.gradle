@@ -54,6 +54,13 @@ task copyMixinLibToServer(type: Copy) {
     into "../server"
 }
 
+task copyMixinLibToLibsDir(type: Copy) {
+    from configurations.compileClasspath.getFiles().stream()
+            .filter(x -> x.getName().matches(".*mixin-.*.jar"))
+            .findFirst().get()
+    into "../libs"
+}
+
 task copyPatchedToServer(type: Copy) {
     from new File("../libs/" + patchedFileName)
     into "../server/cache"
