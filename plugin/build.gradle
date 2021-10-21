@@ -1,3 +1,9 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+import java.nio.file.Files
+import java.nio.file.Path
+import java.util.stream.Collectors
+
 plugins {
     id "com.github.johnrengelman.shadow" version "6.1.0"
 }
@@ -35,4 +41,24 @@ task copyBuildToServer(type: Copy) {
 
 task buildServer {
     dependsOn shadowJar, copyBuildToServer
+}
+
+processResources {
+    filesMatching("**/plugin.yml") {
+        filter(ReplaceTokens, tokens: [
+                "name"     : rootProject.name,
+                "version"  : version,
+                "MainClass": getMainClassFQDN(projectDir.toPath())
+        ])
+    }
+}
+
+static String getMainClassFQDN(Path projectPath) {
+    List<Path> javaFileList = Files.walk(projectPath)
+            .filter(x -> x.getFileName().toString().endsWith(".java"))
+            .collect(Collectors.toList())
+    Path mainClassFile = javaFileList.stream()
+            .filter(path -> Files.lines(path).anyMatch(str -> str.contains("extends JavaPlugin")))
+            .findFirst().get()
+    return mainClassFile.toString().replace('\\', '.').replace('/', '.').replaceAll(".*src.main.java.|.java\$", "")
 }

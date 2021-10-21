@@ -1,4 +1,4 @@
-name: PaperMixinExample
-version: '1.0.0'
-main: net.kunmc.lab.papermixin.PaperMixinExample
+name: @name@
+version: @version@
+main: @MainClass@
 api-version: 1.16
