@@ -13,7 +13,7 @@
 
 ## Usage
 
-Intellij IdeaのRunConfigurationにある```RunServer```を実行すればMixinが適用されたサーバーを起動することが出来ます.  
+Intellij IDEAのRunConfigurationにある```RunServer```を実行すればMixinが適用されたサーバーを起動することが出来ます.  
 (実行時にはプロジェクトのビルド及び必要なファイルをコピーするタスクが走ります.)
 
 他環境でサーバーを実行したい場合は```buildServer```というGradleタスクを実行することでビルドタスク及びserverディレクトリへのコピータスクが実行されます.   
