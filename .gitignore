@@ -1,9 +1,11 @@
 /.gradle/
-/.idea/
+/.idea/*
+!/.idea/saveactions_settings.xml
 build/
 /gradle/
 /libs/*
 !/libs/.keep
 /server/*
+!/server/server.properties
 !/server/start.sh
 !/server/start.cmd
