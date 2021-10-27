@@ -35,17 +35,17 @@ shadowJar {
 
 tasks.build.dependsOn tasks.shadowJar
 
-task copyBuildToServer(type: Copy) {
+task copyBuildToServer(group: "copy", type: Copy) {
     mustRunAfter shadowJar
     from new File(buildDir.absolutePath, "libs/${rootProject.name}-${version}.jar")
     into "../server/plugins"
 }
 
-task buildServer {
+task buildServer(group: "build") {
     dependsOn shadowJar, copyBuildToServer
 }
 
-task buildAndCopy {
+task buildPluginAndCopy(group: "build") {
     dependsOn build, shadowJar, copyBuildToServer
 }
 

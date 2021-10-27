@@ -43,31 +43,31 @@ shadowJar {
 
 tasks.build.dependsOn tasks.shadowJar
 
-task copyBuildToServer(type: Copy) {
+task copyBuildToServer(group: "copy", type: Copy) {
     mustRunAfter shadowJar
     from new File(buildDir.absolutePath, "/libs/server.jar")
     into "../server"
 }
 
-task copyMixinLibToServer(type: Copy) {
+task copyMixinLibToServer(group: "copy", type: Copy) {
     from configurations.compileClasspath.getFiles().stream()
             .filter(x -> x.getName().matches(".*mixin-.*.jar"))
             .findFirst().get()
     into "../server"
 }
 
-task copyMixinLibToLibsDir(type: Copy) {
+task copyMixinLibToLibsDir(group: "copy", type: Copy) {
     from configurations.compileClasspath.getFiles().stream()
             .filter(x -> x.getName().matches(".*mixin-.*.jar"))
             .findFirst().get()
     into "../libs"
 }
 
-task copyPatchedToServer(type: Copy) {
+task copyPatchedToServer(group: "copy", type: Copy) {
     from new File("../libs/" + patchedFileName)
     into "../server/cache"
 }
 
-task buildServer {
+task buildServer(group: "build") {
     dependsOn shadowJar, copyBuildToServer, copyMixinLibToServer, copyPatchedToServer
 }
