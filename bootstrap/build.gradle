@@ -41,6 +41,8 @@ shadowJar {
     archiveFileName = "server.jar"
 }
 
+tasks.build.dependsOn tasks.shadowJar
+
 task copyBuildToServer(type: Copy) {
     mustRunAfter shadowJar
     from new File(buildDir.absolutePath, "/libs/server.jar")
