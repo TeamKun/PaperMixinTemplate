@@ -43,6 +43,10 @@ task buildServer {
     dependsOn shadowJar, copyBuildToServer
 }
 
+task buildAndCopy {
+    dependsOn build, shadowJar, copyBuildToServer
+}
+
 processResources {
     filesMatching("**/plugin.yml") {
         filter(ReplaceTokens, tokens: [
