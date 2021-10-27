@@ -22,10 +22,17 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        url = "https://repo.dmulloy2.net/repository/public/"
+    }
 }
 
 dependencies {
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
+    //compileOnly "com.comphenix.protocol:ProtocolLib:4.7.0"
+    //compileOnly fileTree(dir: "../libs/", include: "patched_1.16.5.jar")
+    //implementation "dev.kotx:flylib-reloaded:0.4.1"
+
 }
 
 shadowJar {
@@ -39,6 +46,16 @@ task copyBuildToServer(group: "copy", type: Copy) {
     mustRunAfter shadowJar
     from new File(buildDir.absolutePath, "libs/${rootProject.name}-${version}.jar")
     into "../server/plugins"
+}
+
+task copyProtocolLibToServer(group: "copy", type: Copy) {
+    File file = configurations.compileClasspath.getFiles().stream()
+            .filter(x -> x.getName().matches(".*ProtocolLib.*.jar"))
+            .findFirst().orElse(null)
+    if (file != null) {
+        from file
+        into "../server/plugins"
+    }
 }
 
 task buildServer(group: "build") {

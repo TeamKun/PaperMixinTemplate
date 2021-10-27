@@ -9,7 +9,9 @@
 ## Installation
 
 1. ```Use this template``` and ```git clone```
-2. Paperサーバーのcacheディレクトリにある```patched_1.16.5.jar```ファイルをルートプロジェクトの```libs```ディレクトリにコピー
+2. setupタスクの```generatePatchedJar```タスクを実行  
+   \*上手く行かない場合  
+   Paperサーバーのcacheディレクトリにある```patched_1.16.5.jar```ファイルをルートプロジェクトの```libs```ディレクトリにコピー
 
 ## Usage
 

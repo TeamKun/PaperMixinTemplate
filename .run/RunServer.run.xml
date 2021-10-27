@@ -14,6 +14,8 @@
                     externalProjectPath="$PROJECT_DIR$/plugin" vmOptions="" scriptParameters=""/>
             <option name="Gradle.BeforeRunTask" enabled="true" tasks="copyBuildToServer"
                     externalProjectPath="$PROJECT_DIR$/plugin" vmOptions="" scriptParameters=""/>
+            <option name="Gradle.BeforeRunTask" enabled="true" tasks="copyProtocolLibToServer"
+                    externalProjectPath="$PROJECT_DIR$/plugin" vmOptions="" scriptParameters=""/>
             <option name="Gradle.BeforeRunTask" enabled="true" tasks="copyMixinLibToLibsDir"
                     externalProjectPath="$PROJECT_DIR$/bootstrap" vmOptions="" scriptParameters=""/>
         </method>
