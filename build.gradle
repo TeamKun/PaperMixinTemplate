@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
 allprojects {
     apply plugin: "java"
 
@@ -6,4 +9,51 @@ allprojects {
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+}
+
+task generatePatchedJar(group: "setup") {
+    File tmpDir = new File(projectDir.toPath().toAbsolutePath().toString() + "/tmp")
+    File tmpPatchedJar = new File(tmpDir.toPath().toAbsolutePath().toString() + "/cache/patched_1.16.5.jar")
+    File serverJar = new File(tmpDir.toPath().toAbsolutePath().toString() + "/tmpserver.jar")
+    File patchedJar = new File(projectDir.toPath().toAbsolutePath().toString() + "/libs/patched_1.16.5.jar")
+
+    if (patchedJar.exists()) {
+        return
+    }
+
+    tmpDir.mkdir()
+    URL url = new URL("https://papermc.io/api/v2/projects/paper/versions/1.16.5/builds/790/downloads/paper-1.16.5-790.jar ")
+    try (InputStream stream = url.openStream()) {
+        Files.copy(stream, serverJar.toPath(), StandardCopyOption.REPLACE_EXISTING)
+    }
+
+    try {
+        Runtime runtime = Runtime.getRuntime()
+        Process p = runtime.exec("java -jar " + serverJar.toPath().toAbsolutePath().toString() + " nogui", new String[0], tmpDir)
+        while (!tmpPatchedJar.exists()) {
+        }
+        p.destroy()
+    } catch (Exception e) {
+        e.printStackTrace()
+    }
+
+    Files.copy(tmpPatchedJar.toPath(), patchedJar.toPath(), StandardCopyOption.REPLACE_EXISTING)
+    delete(tmpDir)
+}
+
+static void delete(File file) {
+    if (!file.exists()) {
+        return
+    }
+
+    if (file.isDirectory()) {
+        for (File child : file.listFiles()) {
+            delete(child)
+        }
+    }
+
+    file.delete()
 }
