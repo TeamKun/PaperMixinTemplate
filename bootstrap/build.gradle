@@ -40,7 +40,6 @@ shadowJar {
     exclude "META-INF/*"
     archiveFileName = "server.jar"
 }
-
 tasks.build.dependsOn tasks.shadowJar
 
 task copyBuildToServer(group: "copy", type: Copy) {

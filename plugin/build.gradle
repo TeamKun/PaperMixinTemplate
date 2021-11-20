@@ -32,14 +32,18 @@ dependencies {
     //compileOnly "com.comphenix.protocol:ProtocolLib:4.7.0"
     //compileOnly fileTree(dir: "../libs/", include: "patched_1.16.5.jar")
     //implementation "dev.kotx:flylib-reloaded:0.4.1"
-
 }
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+//task relocateShadow(type: ConfigureShadowRelocation) {
+//    target = tasks.shadowJar
+//    prefix = project.group
+//}
+//tasks.shadowJar.dependsOn tasks.relocateShadow
 
 shadowJar {
     exclude "META-INF/*"
     archiveFileName = "${rootProject.name}-${version}.jar"
 }
-
 tasks.build.dependsOn tasks.shadowJar
 
 task copyBuildToServer(group: "copy", type: Copy) {
@@ -67,6 +71,7 @@ task buildPluginAndCopy(group: "build") {
 }
 
 processResources {
+    filteringCharset "UTF-8"
     filesMatching("**/plugin.yml") {
         filter(ReplaceTokens, tokens: [
                 "name"     : rootProject.name,
