@@ -36,11 +36,18 @@ public class Main {
 
     private static void loadServerJar(List<String> arguments) throws IOException {
         int index = arguments.indexOf("--serverJar");
-        if (index == -1) {
-            throw new IllegalArgumentException("--serverJar argument is not present");
+
+        Path serverJarPath;
+        if (index != -1) {
+            arguments.remove(index);
+            serverJarPath = Paths.get(arguments.remove(index));
+        } else {
+            serverJarPath = Files.walk(Paths.get("./"))
+                    .filter(p -> p.toFile().getName().matches("patched.*.jar"))
+                    .findFirst()
+                    .get();
         }
-        arguments.remove(index);
-        Path serverJarPath = Paths.get(arguments.remove(index));
+
         if (Files.notExists(serverJarPath)) {
             throw new IOException("Failed to find server jar");
         }
