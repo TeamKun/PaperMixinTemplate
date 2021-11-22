@@ -34,7 +34,13 @@ Intellij IDEAのRunConfigurationにある```RunServer```を実行すればMixin�
 
 * バージョンを変更したい  
   ルートプロジェクトの```build.gradle```の```version```を変更してください.
-
+  
+* Pterodactylで実行したい
+   * adminページのStartupにあるStartup Commandを`java  -javaagent:"./mixin-0.8.2.jar" -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}`とする
+   * 上のページの左下部にあるDockerImageConfigurationからImageをJava8(`quay.io/pterodactyl/core:java`)にする
+   * `buildServerタスク`実行後のserverディレクトリの中身をPterodactylにコピーする
+   
+  
 ## References
 
 https://github.com/LXGaming/BukkitBootstrap \
