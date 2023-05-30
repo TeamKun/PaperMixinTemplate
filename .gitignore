@@ -2,7 +2,6 @@
 /.idea/*
 !/.idea/saveactions_settings.xml
 build/
-/gradle/
 /libs/*
 !/libs/.keep
 /server/*
