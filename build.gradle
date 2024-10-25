@@ -36,7 +36,7 @@ task generatePatchedJar(group: "setup") {
     }
 
     tmpDir.mkdir()
-    URL url = new URL("https://papermc.io/api/v2/projects/paper/versions/1.16.5/builds/790/downloads/paper-1.16.5-790.jar ")
+    URL url = new URL("https://api.papermc.io/v2/projects/paper/versions/1.16.5/builds/790/downloads/paper-1.16.5-790.jar ")
     try (InputStream stream = url.openStream()) {
         Files.copy(stream, serverJar.toPath(), StandardCopyOption.REPLACE_EXISTING)
     }
