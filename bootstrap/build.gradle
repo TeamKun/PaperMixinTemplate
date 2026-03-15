@@ -48,25 +48,11 @@ task copyBuildToServer(group: "copy", type: Copy) {
     into "../server"
 }
 
-task copyMixinLibToServer(group: "copy", type: Copy) {
-    from configurations.compileClasspath.getFiles().stream()
-            .filter(x -> x.getName().matches(".*mixin-.*.jar"))
-            .findFirst().get()
-    into "../server"
-}
-
-task copyMixinLibToLibsDir(group: "copy", type: Copy) {
-    from configurations.compileClasspath.getFiles().stream()
-            .filter(x -> x.getName().matches(".*mixin-.*.jar"))
-            .findFirst().get()
-    into "../libs"
-}
-
 task copyPatchedToServer(group: "copy", type: Copy) {
     from new File("../libs/" + patchedFileName)
     into "../server/cache"
 }
 
 task buildServer(group: "build") {
-    dependsOn shadowJar, copyBuildToServer, copyMixinLibToServer, copyPatchedToServer
+    dependsOn shadowJar, copyBuildToServer, copyPatchedToServer
 }
